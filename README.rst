@@ -11,7 +11,7 @@ to create cron like tasks in python.
 ===============
 
 
-1. Download the tarball and run ``python setup.py install``
+1. Download the tarball and run ``python3 setup.py install``
 
 2. Copy the ``daemonexample.py`` to ``/etc/init.d`` and modify it to suite your needs
 
@@ -44,7 +44,7 @@ Doesn't work well with ``virtualenv``
  Requirements
 ===============
 
-Python 2.5+
+Python 3.0+
 
 
 
