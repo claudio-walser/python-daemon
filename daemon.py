@@ -1,4 +1,5 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
+
 import sys, os, time, atexit
 from signal import SIGTERM
 
@@ -28,7 +29,7 @@ class Daemon(object):
 			if pid > 0:
 				# exit first parent
 				sys.exit(0)
-		except OSError, e:
+		except OSError as e:
 			sys.stderr.write("fork #1 failed: %d (%s)\n" % (e.errno, e.strerror))
 			sys.exit(1)
 
@@ -76,7 +77,7 @@ class Daemon(object):
 		Start the daemon
 		"""
 		# Check for a pidfile to see if the daemon already runs
-		pid = self.getpid()
+		pid = self.get_pid()
 
 		if pid:
 			message = "pidfile %s already exist. Daemon already running?\n"
@@ -90,7 +91,7 @@ class Daemon(object):
 
 	def get_pid(self):
 		try:
-			pf = file(self.pidfile, 'r')
+			pf = open(self.pidfile, 'r')
 			pid = int(pf.read().strip())
 			pf.close()
 		except IOError:
@@ -104,7 +105,7 @@ class Daemon(object):
 		Stop the daemon
 		"""
 		# Get the pid from the pidfile
-		pid = self.getpid()
+		pid = self.get_pid()
 
 		if not pid:
 			message = "pidfile %s does not exist. Daemon not running?\n"
