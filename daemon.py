@@ -76,14 +76,7 @@ class Daemon(object):
 		Start the daemon
 		"""
 		# Check for a pidfile to see if the daemon already runs
-		try:
-			pf = open(self.pidfile,'r')
-			pid = int(pf.read().strip())
-			pf.close()
-		except IOError:
-			pid = None
-		except SystemExit:
-			pid = None
+		pid = self.getpid()
 
 		if pid:
 			message = "pidfile %s already exist. Daemon already running?\n"
@@ -111,12 +104,7 @@ class Daemon(object):
 		Stop the daemon
 		"""
 		# Get the pid from the pidfile
-		try:
-			pf = file(self.pidfile,'r')
-			pid = int(pf.read().strip())
-			pf.close()
-		except IOError:
-			pid = None
+		pid = self.getpid()
 
 		if not pid:
 			message = "pidfile %s does not exist. Daemon not running?\n"
